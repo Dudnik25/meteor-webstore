@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import {Card} from "antd";
 import 'antd/dist/antd.css';
 
-
 export default class ProductCrad extends React.Component {
 
   render() {

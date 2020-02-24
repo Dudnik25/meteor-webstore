@@ -3,7 +3,6 @@ import {Button, Form, Input} from "antd";
 import 'antd/dist/antd.css'
 import {Meteor} from 'meteor/meteor';
 
-
 export default class AddProductForm extends React.Component {
 
   state = {
