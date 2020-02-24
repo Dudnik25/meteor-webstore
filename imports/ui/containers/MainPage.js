@@ -1,48 +1,20 @@
 import React, {Component} from 'react';
-import {Input, Card, Button} from "antd";
-import 'antd/dist/antd.css'
-import {withTracker} from "meteor/react-meteor-data";
-import Product from "../../models/Product";
+import { Button } from 'antd';
 
+export default class MainPage extends Component {
 
-class MainPage extends Component {
-
-    state = {
-        text: '',
-    };
-
-    handleAddProduct = () => {
-        Meteor.call('addProduct', this.state.text);
-    };
-
-    render() {
-        console.log(this);
-        return (
-            <>
-                <div style={{margin: 10}}>
-                    <Input
-                        style={{width: 200}}
-                        onChange={(e) => this.setState({text: e.target.value})}
-                        onPressEnter={this.handleAddProduct}
-                    />
-                    <Button type="primary" onClick={this.handleAddProduct}>add product</Button>
-                </div>
-                <div style={{marginTop: 10}}>
-                    {this.props.product&&this.props.product.map((product, id)=>(
-                        <div key={id}>
-                            <Card title={product.name} bordered={false} style={{ width: 300 }}>
-                                <p>Card content</p>
-                            </Card>
-                        </div>
-                    ))}
-                </div>
-            </>
-        );
-    }
+  render() {
+    return (
+      <>
+        <h1 style={{textAlign: 'center'}}>Главная</h1>
+        <Button type="link" href="/products" block>
+          Products
+        </Button>
+        <Button type="link" href="/cms" block>
+          Cms
+        </Button>
+      </>
+    );
+  }
 }
 
-export default withTracker(() => {
-    return {
-        product: Product.find().fetch()
-    }
-})(MainPage);
