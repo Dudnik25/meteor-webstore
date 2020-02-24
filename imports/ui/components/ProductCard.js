@@ -12,6 +12,12 @@ export default class ProductCrad extends React.Component {
         bordered={false}
         style={{width: 300}}
         extra = {
+          /* Почитай как устроен Router в реакте. Он рендерит текущий компонент
+          *  смотря на его props.history.
+          *  То что мы делаем - single page application. Здесь нету как таковых переходов по страницам.
+          *  Когда нужно показать другую страницу, нужно делать props.history.push(`/products/${this.props.product._id}`)
+          *  и тогда router просто изменит своё состояние, и начнет показывать другую страницу, при этом не перезагружая браузер.
+          */
           <Button type="link" href={`/products/${this.props.product._id}`}>
             Посмотреть
           </Button>

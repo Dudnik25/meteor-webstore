@@ -24,6 +24,8 @@ class Cms extends Component {
               <Icon
                 className="button__close"
                 type="close-circle"
+                 // в случае когда нужно передать параметры, это используют так
+                 // onClick={()=>this.handleRemoveProduct(product._id)}
                 onClick={this.handleRemoveProduct.bind(this, product._id)}
                 style={{color: 'red'}}
               />

@@ -5,6 +5,19 @@ import {Meteor} from 'meteor/meteor';
 
 
 export default class AddProductForm extends React.Component {
+  /* Конструктор здесь не нужен. Его используют когда нужно получить доступ к
+     пропсам родительского компонента, для того, чтобы, например, что-нибудь из них достать
+     и засунуть в state текущего компонента. Поэтому стоит использователь просто
+
+     state = {
+      name: '',
+      description: '',
+      price: null,
+    }
+
+    Без конструктора!
+  */
+
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +26,18 @@ export default class AddProductForm extends React.Component {
       price: null,
     }
   }
+
+  /* В js есть стрелочные функции ()=>{} у них нет своего контекста.
+  *  Их можно использовать для определения методов класса.
+  *  Например, функция ниже будет выглядеть так:
+
+     handleAddProduct = () => {
+       Meteor.call('addProduct', this.state);
+       this.resetForm();
+     };
+
+  *  Ну и соответсвенно когда дальше ты будешь вызывать эту функцию биндить для неё контекст не нужно.
+  *  */
 
   handleAddProduct() {
     Meteor.call('addProduct', this.state);
