@@ -7,12 +7,12 @@ import ProductView from './containers/ProductView';
 
 
 const BaseRouter = () => (
-    <div>
-        <Route exact path='/' component={MainPage}/>
-        <Route exact path='/products' component={Products}/>
-        <Route exact path='/cms' component={Cms}/>
-        <Route exact path='/products/:id' component={ProductView}/>
-    </div>
+  <div>
+    <Route exact path='/' component={MainPage}/>
+    <Route exact path='/products' component={Products}/>
+    <Route exact path='/cms' component={Cms}/>
+    <Route exact path='/products/:id' component={ProductView}/>
+  </div>
 );
 
 export default BaseRouter;

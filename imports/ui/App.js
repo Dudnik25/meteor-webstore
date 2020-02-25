@@ -7,11 +7,11 @@ import {withTracker} from "meteor/react-meteor-data";
 class App extends Component {
   render() {
     return (
-        <div>
-          <Router>
-              <BaseRouter />
-          </Router>
-        </div>
+      <div>
+        <Router>
+          <BaseRouter/>
+        </Router>
+      </div>
     );
   }
 }

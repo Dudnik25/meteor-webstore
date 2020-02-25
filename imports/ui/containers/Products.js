@@ -9,10 +9,10 @@ class Products extends Component {
       <div style={{marginTop: 10}}>
         {this.props.product && this.props.product.map((product, id) => (
           <div key={id}>
-              <ProductCard
-                product={product}
-                link={true}
-              />
+            <ProductCard
+              product={product}
+              link={true}
+            />
           </div>
         ))
         }

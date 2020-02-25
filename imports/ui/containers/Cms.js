@@ -15,7 +15,7 @@ class Cms extends Component {
     return (
       <>
       <div style={{margin: 10}}>
-        <AddProductForm />
+        <AddProductForm/>
       </div>
       <div style={{marginTop: 10}}>
         {this.props.product && this.props.product.map((product, id) => (
@@ -24,9 +24,7 @@ class Cms extends Component {
               <Icon
                 className="button__close"
                 type="close-circle"
-                 // в случае когда нужно передать параметры, это используют так
-                 // onClick={()=>this.handleRemoveProduct(product._id)}
-                onClick={this.handleRemoveProduct.bind(this, product._id)}
+                onClick={() => this.handleRemoveProduct(product._id)}
                 style={{color: 'red'}}
               />
             }>

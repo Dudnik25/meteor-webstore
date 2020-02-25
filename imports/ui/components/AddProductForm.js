@@ -1,50 +1,22 @@
 import React from 'react'
-import {Input, Button, Form} from "antd";
+import {Button, Form, Input} from "antd";
 import 'antd/dist/antd.css'
 import {Meteor} from 'meteor/meteor';
 
-
 export default class AddProductForm extends React.Component {
-  /* Конструктор здесь не нужен. Его используют когда нужно получить доступ к
-     пропсам родительского компонента, для того, чтобы, например, что-нибудь из них достать
-     и засунуть в state текущего компонента. Поэтому стоит использователь просто
 
-     state = {
-      name: '',
-      description: '',
-      price: null,
-    }
+  state = {
+    name: '',
+    description: '',
+    price: null,
+  };
 
-    Без конструктора!
-  */
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      description: '',
-      price: null,
-    }
-  }
-
-  /* В js есть стрелочные функции ()=>{} у них нет своего контекста.
-  *  Их можно использовать для определения методов класса.
-  *  Например, функция ниже будет выглядеть так:
-
-     handleAddProduct = () => {
-       Meteor.call('addProduct', this.state);
-       this.resetForm();
-     };
-
-  *  Ну и соответсвенно когда дальше ты будешь вызывать эту функцию биндить для неё контекст не нужно.
-  *  */
-
-  handleAddProduct() {
+  handleAddProduct = () => {
     Meteor.call('addProduct', this.state);
     this.resetForm();
   };
 
-  resetForm() {
+  resetForm = () => {
     this.setState({
       name: '',
       description: '',
@@ -54,14 +26,14 @@ export default class AddProductForm extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleAddProduct.bind(this)}>
+      <Form>
         <Input
           className="addproduct__input"
           addonBefore="Название товара"
           placeholder="Название товара"
           allowClear
           onChange={(e) => this.setState({name: e.target.value})}
-          onPressEnter={this.handleAddProduct.bind(this)}
+          onPressEnter={this.handleAddProduct}
           value={this.state.name}
         />
         <Input
@@ -70,7 +42,7 @@ export default class AddProductForm extends React.Component {
           placeholder="Описание товара"
           allowClear
           onChange={(e) => this.setState({description: e.target.value})}
-          onPressEnter={this.handleAddProduct.bind(this)}
+          onPressEnter={this.handleAddProduct}
           value={this.state.description}
         />
         <Input
@@ -82,7 +54,7 @@ export default class AddProductForm extends React.Component {
           onPressEnter={this.handleAddProduct.bind(this)}
           value={this.state.price}
         />
-        <Button type="primary" onClick={this.handleAddProduct.bind(this)}>add product</Button>
+        <Button type="primary" onClick={this.handleAddProduct}>add product</Button>
       </Form>
     )
   }
