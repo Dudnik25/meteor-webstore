@@ -10,20 +10,24 @@ export default class AddProductForm extends React.Component {
     name: '',
     description: '',
     price: null,
+    file: '',
   };
 
   imageList = [];
 
   handleAddProduct = () => {
-    this.imageList.forEach((image) => {
+/*    this.imageList.forEach((image) => {
       Images.insert({
         file: image,
         streams: 'dynamic',
         chunkSize: 'dynamic'
       }, false);
-    });
+    });*/
 
-    Meteor.call('addProduct', this.state);
+    const reader = new FileReader();
+    reader.onloadend = () => Meteor.call('addProduct', this.state, reader.result);
+    reader.readAsBinaryString(this.state.file.originFileObj); //сделать функцию из этого
+
     this.resetForm();
   };
 
@@ -80,7 +84,7 @@ export default class AddProductForm extends React.Component {
           defaultFileList={this.imageList}
           listType="picture"
           className="upload-list-inline"
-          onChange={(e) => this.uploadImage(e)}
+          onChange={(e) => this.setState({file: e.file})}
         >
           <Button>
             <Icon type="upload" /> Upload

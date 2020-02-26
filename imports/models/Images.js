@@ -1,4 +1,3 @@
-import {Meteor} from 'meteor/meteor';
 import {FilesCollection} from 'meteor/ostrio:files';
 
 const Images = new FilesCollection({
@@ -14,10 +13,12 @@ const Images = new FilesCollection({
 
 export default Images;
 
+
+// Это тут не нужно!
 if (Meteor.isClient) {
   Meteor.subscribe('files.images.all');
 }
-
+// это тоже
 if (Meteor.isServer) {
   Meteor.publish('files.images.all', function () {
     return Images.find().cursor;
