@@ -1,4 +1,5 @@
 import {Class} from 'meteor/jagi:astronomy';
+import {Meteor} from 'meteor/meteor';
 
 const Product = Class.create({
   name: 'Product',

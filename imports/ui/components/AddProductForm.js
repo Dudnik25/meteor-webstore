@@ -1,7 +1,8 @@
 import React from 'react'
-import {Button, Form, Input} from "antd";
+import {Button, Form, Input, Upload, Icon,  message} from "antd";
 import 'antd/dist/antd.css'
 import {Meteor} from 'meteor/meteor';
+import Images from '../../models/Images';
 
 export default class AddProductForm extends React.Component {
 
@@ -11,7 +12,17 @@ export default class AddProductForm extends React.Component {
     price: null,
   };
 
+  imageList = [];
+
   handleAddProduct = () => {
+    this.imageList.forEach((image) => {
+      Images.insert({
+        file: image,
+        streams: 'dynamic',
+        chunkSize: 'dynamic'
+      }, false);
+    });
+
     Meteor.call('addProduct', this.state);
     this.resetForm();
   };
@@ -21,7 +32,18 @@ export default class AddProductForm extends React.Component {
       name: '',
       description: '',
       price: null,
-    })
+    });
+    this.imageList = null;
+  };
+
+  uploadImage = (e) => {
+    if (e.file.status === 'done') {
+      message.success(`${e.file.name} file uploaded successfully`);
+      this.imageList.push(e.file);
+      console.log(this.imageList);
+    } else if (e.file.status === 'error') {
+      message.error(`${e.file.name} file upload failed.`);
+    }
   };
 
   render() {
@@ -54,6 +76,16 @@ export default class AddProductForm extends React.Component {
           onPressEnter={this.handleAddProduct.bind(this)}
           value={this.state.price}
         />
+        <Upload
+          defaultFileList={this.imageList}
+          listType="picture"
+          className="upload-list-inline"
+          onChange={(e) => this.uploadImage(e)}
+        >
+          <Button>
+            <Icon type="upload" /> Upload
+          </Button>
+        </Upload>
         <Button type="primary" onClick={this.handleAddProduct}>add product</Button>
       </Form>
     )
