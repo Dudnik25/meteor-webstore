@@ -9,10 +9,15 @@ export default class AddProductForm extends React.Component {
     name: '',
     description: '',
     price: null,
+    file: '',
   };
 
   handleAddProduct = () => {
-    Meteor.call('addProduct', this.state);
+    console.log(this.state.file);
+    const reader = new FileReader();
+    reader.onloadend = () => Meteor.call('addProduct', this.state, reader.result);
+    reader.readAsBinaryString(this.state.file.originFileObj); //сделать функцию из этого
+
     this.resetForm();
   };
 
@@ -21,7 +26,7 @@ export default class AddProductForm extends React.Component {
       name: '',
       description: '',
       price: null,
-    })
+    });
   };
 
   render() {
@@ -54,8 +59,10 @@ export default class AddProductForm extends React.Component {
           onPressEnter={this.handleAddProduct.bind(this)}
           value={this.state.price}
         />
+        <Input type="file" onChange={(e) => this.setState({file: e.currentTarget.files})}
+               style={{marginBottom: '20px', height: 'auto'}}/>
         <Button type="primary" onClick={this.handleAddProduct}>add product</Button>
       </Form>
-    )
+    );
   }
 }

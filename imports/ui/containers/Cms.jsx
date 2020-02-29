@@ -3,7 +3,7 @@ import {Card, Icon} from "antd";
 import 'antd/dist/antd.css'
 import {withTracker} from "meteor/react-meteor-data";
 import Product from "../../models/Product";
-import AddProductForm from './../components/AddProductForm'
+import AddProductForm from '../components/AddProductForm'
 
 class Cms extends Component {
 

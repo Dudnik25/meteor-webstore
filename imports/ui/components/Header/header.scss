@@ -1,0 +1,27 @@
+.header {
+
+  &__container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__logo {
+    width: auto;
+    height: 50px;
+    margin-right: 10px;
+  }
+
+  &__button {
+    margin: 0 10px;
+  }
+
+  &__accounts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withTracker} from "meteor/react-meteor-data";
 import Product from "../../models/Product";
-import ProductCard from "./../components/ProductCard";
+import ProductCard from "../components/ProductCard";
 
 class ProductView extends Component {
   render() {
