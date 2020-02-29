@@ -1,8 +1,7 @@
 import React from 'react'
-import {Button, Form, Input, Upload, Icon,  message} from "antd";
+import {Button, Form, Input} from "antd";
 import 'antd/dist/antd.css'
 import {Meteor} from 'meteor/meteor';
-import Images from '../../models/Images';
 
 export default class AddProductForm extends React.Component {
 
@@ -13,17 +12,8 @@ export default class AddProductForm extends React.Component {
     file: '',
   };
 
-  imageList = [];
-
   handleAddProduct = () => {
-/*    this.imageList.forEach((image) => {
-      Images.insert({
-        file: image,
-        streams: 'dynamic',
-        chunkSize: 'dynamic'
-      }, false);
-    });*/
-
+    console.log(this.state.file);
     const reader = new FileReader();
     reader.onloadend = () => Meteor.call('addProduct', this.state, reader.result);
     reader.readAsBinaryString(this.state.file.originFileObj); //сделать функцию из этого
@@ -37,17 +27,6 @@ export default class AddProductForm extends React.Component {
       description: '',
       price: null,
     });
-    this.imageList = null;
-  };
-
-  uploadImage = (e) => {
-    if (e.file.status === 'done') {
-      message.success(`${e.file.name} file uploaded successfully`);
-      this.imageList.push(e.file);
-      console.log(this.imageList);
-    } else if (e.file.status === 'error') {
-      message.error(`${e.file.name} file upload failed.`);
-    }
   };
 
   render() {
@@ -80,18 +59,10 @@ export default class AddProductForm extends React.Component {
           onPressEnter={this.handleAddProduct.bind(this)}
           value={this.state.price}
         />
-        <Upload
-          defaultFileList={this.imageList}
-          listType="picture"
-          className="upload-list-inline"
-          onChange={(e) => this.setState({file: e.file})}
-        >
-          <Button>
-            <Icon type="upload" /> Upload
-          </Button>
-        </Upload>
+        <Input type="file" onChange={(e) => this.setState({file: e.currentTarget.files})}
+               style={{marginBottom: '20px', height: 'auto'}}/>
         <Button type="primary" onClick={this.handleAddProduct}>add product</Button>
       </Form>
-    )
+    );
   }
 }
